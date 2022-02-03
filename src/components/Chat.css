@@ -54,27 +54,30 @@
 
 .chat__footer {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
     height: 120px;
-}
-
-.chat__footerMessage {
-    display: flex;
-    height: 60px;
-    margin: 27px;
-    padding: 10px;
     background-color: white;
-    border-radius: 30px;
+    border-top: 2px solid black;
+}
+
+.chat__footer > form {
     flex: 1;
+    display: flex;
+    background-color: blue;
 }
 
-.chat__formInput {
+.chat__footer > form > input {
+    flex: 1;
+    border-radius: 30px;
+    padding: 10px;
     border: none;
-    font-size: medium;
-    text-align: center;
 }
 
-.sendMessage {
-    
+.chat__footer > form > button {
+    display: none;
+
 }
+
 
 

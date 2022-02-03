@@ -3,11 +3,18 @@ import "./Chat.css";
 import { Avatar } from "@material-ui/core";
 
 function Chat() {
+  const [input, setInput] = useState("");
   const [seed, setSeed] = useState("");
 
   useEffect(() => {
     setSeed(Math.floor(Math.random() * 5000));
   }, []);
+
+  const sendMessage = (e) => {
+    e.preventDefault();
+    // console.log('e.target.value', input);
+    setInput("");
+  }
 
   return (
     <div className="chat">
@@ -36,12 +43,10 @@ function Chat() {
         </div>
       </div>
       <div className="chat__footer">
-        <div className="chat__footerMessage">
-        <form className="chat__form">
-          <input className="chat__formInput" type="text" placeholder="Type your message"/>
-          <button className="sendMessage">Send a message</button>
+        <form>
+          <input value={input} onChange={e => setInput(e.target.value)} type="text" placeholder="Type your message"/>
+          <button type="submit" onClick={sendMessage}>Send a message</button>
         </form>
-        </div>
       </div>
     </div>
   );
