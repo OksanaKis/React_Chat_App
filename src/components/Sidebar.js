@@ -4,12 +4,14 @@ import { Avatar } from "@material-ui/core";
 import "./Sidebar.css";
 import { SearchOutlined } from "@material-ui/icons";
 import SidebarChat from "./SidebarChat";
+import { useStateValue } from "../authentication/StateProvider"
 
 function Sidebar() {
   const [rooms, setRooms] = useState([]);
+  const [{user}, dispatch] = useStateValue();
 
   useEffect(() => {
-    db.collection("rooms").onSnapshot((snapshot) => {
+    const unsubscribe = db.collection("rooms").onSnapshot((snapshot) => {
       setRooms(
         snapshot.docs.map((doc) => ({
           id: doc.id,
@@ -17,12 +19,15 @@ function Sidebar() {
         }))
       );
     });
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   return (
     <div className="sidebar">
       <div className="sidebar_header">
-        <Avatar />
+        <Avatar src={user?.photoURL}></Avatar>
       </div>
       <div className="sidebar__search">
         <div className="sidebar__searchContainer">
