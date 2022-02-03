@@ -4,11 +4,12 @@ import { Avatar } from "@material-ui/core";
 import "./Sidebar.css";
 import { SearchOutlined } from "@material-ui/icons";
 import SidebarChat from "./SidebarChat";
-import { useStateValue } from "../authentication/StateProvider"
+import { useStateValue } from "../authentication/StateProvider";
 
 function Sidebar() {
   const [rooms, setRooms] = useState([]);
   const [{user}, dispatch] = useStateValue();
+
 
   useEffect(() => {
     const unsubscribe = db.collection("rooms").onSnapshot((snapshot) => {
