@@ -8,13 +8,12 @@ import "firebase/compat/firestore";
 import { getRandomJokes } from "../api/getRandomJoke";
 import { useStateValue } from "../authentication/StateProvider";
 
-function Chat() {
+function ChatNew() {
   const [input, setInput] = useState("");
-  const [seed, setSeed] = useState("");
+  //   const [seed, setSeed] = useState("");
   const { roomId } = useParams();
   const [roomName, setRoomName] = useState("");
   const [messages, setMessages] = useState([]);
-  const [chuckJokes, setChuckJokes] = useState([]);
   const [joke, setJoke] = useState("");
   const [{ user }, dispatch] = useStateValue();
 
@@ -32,10 +31,9 @@ function Chat() {
         .onSnapshot((snapshot) => {
           setMessages(snapshot.docs.map((doc) => doc.data()));
         });
-        db.collection("rooms")
+      db.collection("rooms")
         .doc(roomId)
         .collection("messages")
-        // .collection("messages")
         .orderBy("timestamp", "asc")
         .onSnapshot((snapshot) => {
           setMessages(snapshot.docs.map((doc) => doc.data()));
@@ -43,22 +41,12 @@ function Chat() {
     }
   }, [roomId]);
 
-  // useEffect(() => {
-  //   setSeed(Math.floor(Math.random() * 5000));
-  // }, []);
-
-  // useEffect(() => {
-  //   db.collection("rooms")
-  //     .doc(roomId)
-  //     .collection("jokes")
-  //     .orderBy("timestamp", "asc")
-  //     .onSnapshot((snapshot) => {
-  //       setChuckJokes(snapshot.docs.map((doc) => doc.data()));
-  //     });
-  // }, [joke]);
+//   useEffect(() => {
+//     setTimeout(randomJoke(), 10000);
+//   }, [roomId]);
 
   function randomJoke() {
-    let chuckNorris = 'Chuck Norris';
+    let chuckNorris = "Chuck Norris";
     const data = getRandomJokes();
     data
       .then((res) => {
@@ -89,54 +77,28 @@ function Chat() {
   return (
     <div className="chat">
       <div className="chat__header">
-        {/* <Avatar src={`https://avatars.dicebear.com/api/human/${seed}.svg`} /> */}
         <Avatar />
         <div className="chat__headerInfo">
           <h3>{roomName}</h3>
-          <p>Last seen at...</p>
         </div>
       </div>
       <div className="chat__body">
-        <div className="chat__bodyMessage">
-          <Avatar />
-          <div className={`chat__message ${true && "chat__receiver"}`}>
-            {/* {chuckJokes.map((chuckJoke, index) => (
-              <p key={index}>{chuckJoke.message}</p>
-            ))} */}
-             {messages.map((message, index) => (
-            <p
-              key={index}
-              className={`chat_message ${
-                message.name === user.displayName && "chat_receiver"
-              }`}
-            >
-              {message.message}
-              <span className="chat_timestemp">
-                {new Date(message.timestamp?.toDate()).toUTCString()}
-              </span>
-            </p>
-          ))}
-          </div>
-          <div className="chat__timestamp">
-            <span>4:34 PM</span>
-          </div>
-          
-        </div>
-        {/* <div className="chat__bodyReceiver">
-          {messages.map((message, index) => (
-            <p
-              key={index}
-              className={`chat_message ${
-                message.name === user.displayName && "chat_receiver"
-              }`}
-            >
-              {message.message}
-              <span className="chat_timestemp">
-                {new Date(message.timestamp?.toDate()).toUTCString()}
-              </span>
-            </p>
-          ))}
-        </div> */}
+      <div className="chat__bodyMessage">
+        {messages.map((message, index) => (
+          <p
+            key={index}
+            className={`chat__message ${
+              message.name == user.displayName && "chat__receiver"
+            }`}
+          >
+            {/* <span className="chat_name">{message.name}</span> */}
+            {message.message}
+            <span className="chat__timestemp">
+              {new Date(message.timestamp?.toDate()).toUTCString()}
+            </span>
+          </p>
+        ))}
+      </div>
       </div>
       <div className="chat__footer">
         <form>
@@ -144,10 +106,11 @@ function Chat() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             type="text"
-            placeholder="Type your message"
+            placeholder="Type a message"
           />
           <button type="submit" onClick={sendMessage}>
-            Send a message
+            {" "}
+            Send a Message
           </button>
         </form>
       </div>
@@ -155,4 +118,4 @@ function Chat() {
   );
 }
 
-export default Chat;
+export default ChatNew;
