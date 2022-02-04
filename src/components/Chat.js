@@ -7,6 +7,7 @@ import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import { getRandomJokes } from "../api/getRandomJoke";
 import { useStateValue } from "../authentication/StateProvider";
+import geenTick from "../image/greentick.png";
 
 function Chat() {
   const [input, setInput] = useState("");

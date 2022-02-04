@@ -7,6 +7,8 @@ import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import { getRandomJokes } from "../api/getRandomJoke";
 import { useStateValue } from "../authentication/StateProvider";
+import sendIcon from "../image/send4.png";
+import geenTick from "../image/greentick.png";
 
 function ChatNew() {
   const [input, setInput] = useState("");
@@ -78,6 +80,7 @@ function ChatNew() {
     <div className="chat">
       <div className="chat__header">
         <Avatar />
+        <img className="greenTick" src={geenTick} alt="" />
         <div className="chat__headerInfo">
           <h3>{roomName}</h3>
         </div>
@@ -85,6 +88,7 @@ function ChatNew() {
       <div className="chat__body">
       <div className="chat__bodyMessage">
         {messages.map((message, index) => (
+            <div className="chat__bodyMessage">
           <p
             key={index}
             className={`chat__message ${
@@ -97,6 +101,7 @@ function ChatNew() {
               {new Date(message.timestamp?.toDate()).toUTCString()}
             </span>
           </p>
+          </div>
         ))}
       </div>
       </div>
@@ -110,7 +115,7 @@ function ChatNew() {
           />
           <button type="submit" onClick={sendMessage}>
             {" "}
-            Send a Message
+            <img className="sendIcon" src={sendIcon} alt="" />
           </button>
         </form>
       </div>
