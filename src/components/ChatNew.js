@@ -71,7 +71,7 @@ function ChatNew() {
       message: input,
       name: user.displayName,
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-    });
+    }); 
     setInput("");
     setTimeout(randomJoke(), 10000);
   };
