@@ -12,9 +12,6 @@ import geenTick from "../image/greentick.png";
 
 
 function SidebarChat({id, name}) {
-  // const [seeds, setSeeds] = useState([avatarJosefina, avatarVelaz, avatarAlice, avatarBarrera]);
-  // const [seed, setSeed] = useState();
-
   const [messages, setMessages] = useState("");
 
   useEffect(() => {
@@ -23,29 +20,19 @@ function SidebarChat({id, name}) {
       setMessages(snapshot.docs.map((doc) => doc.data()))
     ))
   }
-  }, []);
-
-  // useEffect(() => {
-  //   // setSeed(Math.floor(Math.random() * 5000));
-  //   seeds.map((image, index) => {
-  //     if() {
-  //       setSeed(image);
-  //     }
-  //   })
-  // }, []);
+  }, [id]);
 
   return (
     <Link to={`/rooms/${id}`} key={id}>
       <div className="sidebarChat">
-      {/* <Avatar src={`https://avatars.dicebear.com/api/human/${seed}.svg`} /> */}
       <Avatar />
       <img className="greenTick" src={geenTick} alt="" />
       <div className="sidebarChat__info">
-        <h2 className="sidebarChat__names">{name}</h2>
-        <p>{messages[0]?.message}</p>
-      </div>
-      <div className="sidebarChatDate">
-        Date
+        <h2 className="sidebarChat__names">{name}<span className="sidebar__timestemp">
+          {/* {new Date(messages[0]?.timestamp.toDate()).toString().substring(4,16)} */}
+        </span></h2>
+        <p>{messages[0]?.message.slice(0, 25)+'...'}
+        </p>
       </div>
     </div>
     </Link>

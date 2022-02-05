@@ -21,7 +21,7 @@ function ChatNew() {
 
   useEffect(() => {
     if (roomId) {
-      db.collection("rooms")
+     db.collection("rooms")
         .doc(roomId)
         .onSnapshot((snapshot) => {
           setRoomName(snapshot.data().name);
@@ -43,11 +43,22 @@ function ChatNew() {
     }
   }, [roomId]);
 
-//   useEffect(() => {
-//     setTimeout(randomJoke(), 10000);
-//   }, [roomId]);
+  // useEffect(() => {
+  //   const timer = setTimeout(() => randomJoke(), 10000);
+  //   return () => clearTimeout(timer);
+  // }, []);
 
-  function randomJoke() {
+//   const timerRef = useRef(null);
+// const sendMessage = (e) => {
+//   e.preventDefault();
+//   timerRef.current = setTimeout(() => alert('Hey ??'), 1000);
+// }
+// useEffect(() => {
+//   // Clear the interval when the component unmounts
+//   return () => clearTimeout(timerRef.current);
+// }, []);
+
+  async function randomJoke() {
     let chuckNorris = "Chuck Norris";
     const data = getRandomJokes();
     data
@@ -55,25 +66,24 @@ function ChatNew() {
         return res;
       })
       .then((response) => {
-        setJoke(response.data.value);
-        console.log(response);
+      setJoke(response.data.value);
       });
-    db.collection("rooms").doc(roomId).collection("messages").add({
+    await db.collection("rooms").doc(roomId).collection("messages").add({
       message: joke,
       name: chuckNorris,
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     });
   }
 
-  const sendMessage = (e) => {
+  const sendMessage = async (e) => {
     e.preventDefault();
-    db.collection("rooms").doc(roomId).collection("messages").add({
+  await db.collection("rooms").doc(roomId).collection("messages").add({
       message: input,
       name: user.displayName,
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     }); 
     setInput("");
-    setTimeout(randomJoke(), 10000);
+  await setTimeout(() => randomJoke(), 10000);
   };
 
   return (
@@ -98,7 +108,7 @@ function ChatNew() {
             {/* <span className="chat_name">{message.name}</span> */}
             {message.message}
             <span className="chat__timestemp">
-              {new Date(message.timestamp?.toDate()).toUTCString()}
+              {new Date(message.timestamp?.toDate()).toString().substring(4,16)}
             </span>
           </p>
           </div>
