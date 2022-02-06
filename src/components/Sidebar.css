@@ -21,6 +21,28 @@
   border-bottom: 3px solid lightgrey;
 }
 
+.searchInput {
+  position: absolute;
+  margin-bottom: -180px;
+  margin-left: 5px;
+  width: 25%;
+  border-radius: 10px;
+  background-color: #96ded1;
+  list-style: none;
+  z-index: 111;
+  max-height: 240px;
+  height: auto;
+  overflow: auto;
+}
+
+.searchInputItem {
+  padding: 5px;
+}
+
+.searchInputItem:hover {
+  cursor: pointer;
+}
+
 .sidebar__searchContainer {
   background-color: white;
   display: flex;
@@ -41,6 +63,10 @@
   background-color: #f6f6f6;
   flex: 1;
   overflow:scroll;
+}
+
+.sidebar_chats > h2 {
+  margin: 30px;
 }
 
 .search {

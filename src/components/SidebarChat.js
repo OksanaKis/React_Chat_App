@@ -28,9 +28,7 @@ function SidebarChat({id, name}) {
       <Avatar />
       <img className="greenTick" src={geenTick} alt="" />
       <div className="sidebarChat__info">
-        <h2 className="sidebarChat__names">{name}<span className="sidebar__timestemp">
-          {/* {new Date(messages[0]?.timestamp.toDate()).toString().substring(4,16)} */}
-        </span></h2>
+        <h2 className="sidebarChat__names">{name}</h2>
         <p>{messages[0]?.message.slice(0, 25)+'...'}
         </p>
       </div>

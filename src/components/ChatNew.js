@@ -33,13 +33,13 @@ function ChatNew() {
         .onSnapshot((snapshot) => {
           setMessages(snapshot.docs.map((doc) => doc.data()));
         });
-      db.collection("rooms")
-        .doc(roomId)
-        .collection("messages")
-        .orderBy("timestamp", "asc")
-        .onSnapshot((snapshot) => {
-          setMessages(snapshot.docs.map((doc) => doc.data()));
-        });
+      // db.collection("rooms")
+      //   .doc(roomId)
+      //   .collection("messages")
+      //   .orderBy("timestamp", "asc")
+      //   .onSnapshot((snapshot) => {
+      //     setMessages(snapshot.docs.map((doc) => doc.data()));
+      //   });
     }
   }, [roomId]);
 
@@ -58,7 +58,7 @@ function ChatNew() {
 //   return () => clearTimeout(timerRef.current);
 // }, []);
 
-  async function randomJoke() {
+  const randomJoke = async () => {
     let chuckNorris = "Chuck Norris";
     const data = getRandomJokes();
     data
@@ -66,14 +66,17 @@ function ChatNew() {
         return res;
       })
       .then((response) => {
-      setJoke(response.data.value);
+    setJoke(response.data.value);
       });
+      console.log("JOKE", joke);
     await db.collection("rooms").doc(roomId).collection("messages").add({
       message: joke,
       name: chuckNorris,
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     });
   }
+
+  console.log("message", messages)
 
   const sendMessage = async (e) => {
     e.preventDefault();
@@ -83,7 +86,7 @@ function ChatNew() {
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     }); 
     setInput("");
-  await setTimeout(() => randomJoke(), 10000);
+  setTimeout(async () => await randomJoke(), 10000);
   };
 
   return (
@@ -105,10 +108,9 @@ function ChatNew() {
               message.name == user.displayName && "chat__receiver"
             }`}
           >
-            {/* <span className="chat_name">{message.name}</span> */}
             {message.message}
             <span className="chat__timestemp">
-              {new Date(message.timestamp?.toDate()).toString().substring(4,16)}
+              {new Date(message.timestamp?.toDate()).toLocaleString('en-US')}
             </span>
           </p>
           </div>

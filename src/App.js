@@ -19,8 +19,6 @@ function App() {
         <Router>
             <Sidebar />
             <Routes>
-                  {/* <Route path="/rooms/:roomId" element={<Chat/>}/>
-                  <Route path="/" element={<Chat/>}/>         */}
                   <Route path="/rooms/:roomId" element={<ChatNew/>}/>
                   <Route path="/" element={<ChatNew/>}/>
                 </Routes>            

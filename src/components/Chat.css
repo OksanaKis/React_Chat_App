@@ -38,10 +38,8 @@
 }
 
 .chat__bodyMessage {
-    /* display: flex; */
     margin: 15px;
     padding: 10px;
-    /* забрати бордер боттом */
 }
 
 .chat__message {
@@ -53,34 +51,26 @@
     margin-right: 15px;
     padding: 20px;
     border-radius: 50px;
-    /* background-color: #383838; */
     background-color: #474747;
-
 }
 
 .chat__receiver{
+    position: relative;
     margin-left: auto;
     background-color: #dcdcdc;
     color: #474747;
     text-align:left;
-    margin-top: 50px;
+    margin-top: 30px;
     margin-bottom: 50px;
 }
 
-/* .chat__bodyMessage > p > span {
-    background-color: #f6f6f6;
-} */
-
-/* .chat__timestemp {
-    position: absolute;
-    display: flex;
-    bottom: -50px;
-    color: black;
-} */ 
-
 .chat__timestemp {
-    color: black;
+    color: #474747;
+    display: flex;
+    width: 200px;
     margin-left: 15px;
+    margin-bottom: -60px;
+    padding: 20px;
 }
 
 .chat__footer {
@@ -89,7 +79,6 @@
     align-items: center;
     height: 120px;
     background-color: #dcdcdc;
-    /* border-bottom: 2px solid lightgrey; */
 }
 
 .chat__footer > form {
@@ -115,7 +104,6 @@ input:focus {
 .chat__footer > form > button {
     width: 60px;
     height: 40px;
-    /* margin-left: 15px; */
     margin: 10px;
     border: white;
     background-color: white;
