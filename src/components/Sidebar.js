@@ -4,7 +4,6 @@ import { Avatar } from "@material-ui/core";
 import "./Sidebar.css";
 import SidebarChat from "./SidebarChat";
 import { useStateValue } from "../authentication/StateProvider";
-import geenTick from "../image/greentick.png";
 import search from "../image/search.png";
 
 function Sidebar() {
@@ -43,7 +42,6 @@ function Sidebar() {
   return (
     <div className="sidebar">
       <div className="sidebar_header">
-        {/* <img className="greenTick" src={geenTick} alt="" /> */}
         <Avatar src={user?.photoURL}></Avatar>
       </div>
       <div className="sidebar__search">

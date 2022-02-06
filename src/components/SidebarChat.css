@@ -21,7 +21,7 @@
 
 a {
   text-decoration: none !important;
-  color:#a9a9a9;
+  color: #a9a9a9;
 }
 
 .sidebarChat__names {
@@ -33,4 +33,3 @@ a {
   margin-bottom: -35px;
   z-index: 1;
 }
-

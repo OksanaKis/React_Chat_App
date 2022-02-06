@@ -62,7 +62,7 @@
 .sidebar_chats {
   background-color: #f6f6f6;
   flex: 1;
-  overflow:scroll;
+  overflow: scroll;
 }
 
 .sidebar_chats > h2 {

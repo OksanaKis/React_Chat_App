@@ -12,7 +12,6 @@ import geenTick from "../image/greentick.png";
 
 function ChatNew() {
   const [input, setInput] = useState("");
-  //   const [seed, setSeed] = useState("");
   const { roomId } = useParams();
   const [roomName, setRoomName] = useState("");
   const [messages, setMessages] = useState([]);
@@ -21,7 +20,7 @@ function ChatNew() {
 
   useEffect(() => {
     if (roomId) {
-     db.collection("rooms")
+      db.collection("rooms")
         .doc(roomId)
         .onSnapshot((snapshot) => {
           setRoomName(snapshot.data().name);
@@ -33,30 +32,8 @@ function ChatNew() {
         .onSnapshot((snapshot) => {
           setMessages(snapshot.docs.map((doc) => doc.data()));
         });
-      // db.collection("rooms")
-      //   .doc(roomId)
-      //   .collection("messages")
-      //   .orderBy("timestamp", "asc")
-      //   .onSnapshot((snapshot) => {
-      //     setMessages(snapshot.docs.map((doc) => doc.data()));
-      //   });
     }
   }, [roomId]);
-
-  // useEffect(() => {
-  //   const timer = setTimeout(() => randomJoke(), 10000);
-  //   return () => clearTimeout(timer);
-  // }, []);
-
-//   const timerRef = useRef(null);
-// const sendMessage = (e) => {
-//   e.preventDefault();
-//   timerRef.current = setTimeout(() => alert('Hey ??'), 1000);
-// }
-// useEffect(() => {
-//   // Clear the interval when the component unmounts
-//   return () => clearTimeout(timerRef.current);
-// }, []);
 
   const randomJoke = async () => {
     let chuckNorris = "Chuck Norris";
@@ -66,27 +43,24 @@ function ChatNew() {
         return res;
       })
       .then((response) => {
-    setJoke(response.data.value);
+        setJoke(response.data.value);
       });
-      console.log("JOKE", joke);
     await db.collection("rooms").doc(roomId).collection("messages").add({
       message: joke,
       name: chuckNorris,
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     });
-  }
-
-  console.log("message", messages)
+  };
 
   const sendMessage = async (e) => {
     e.preventDefault();
-  await db.collection("rooms").doc(roomId).collection("messages").add({
+    await db.collection("rooms").doc(roomId).collection("messages").add({
       message: input,
       name: user.displayName,
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-    }); 
+    });
     setInput("");
-  setTimeout(async () => await randomJoke(), 10000);
+    setTimeout(async () => await randomJoke(), 10000);
   };
 
   return (
@@ -99,23 +73,25 @@ function ChatNew() {
         </div>
       </div>
       <div className="chat__body">
-      <div className="chat__bodyMessage">
-        {messages.map((message, index) => (
+        <div className="chat__bodyMessage">
+          {messages.map((message, index) => (
             <div className="chat__bodyMessage">
-          <p
-            key={index}
-            className={`chat__message ${
-              message.name == user.displayName && "chat__receiver"
-            }`}
-          >
-            {message.message}
-            <span className="chat__timestemp">
-              {new Date(message.timestamp?.toDate()).toLocaleString('en-US')}
-            </span>
-          </p>
-          </div>
-        ))}
-      </div>
+              <p
+                key={index}
+                className={`chat__message ${
+                  message.name == user.displayName && "chat__receiver"
+                }`}
+              >
+                {message.message}
+                <span className="chat__timestemp">
+                  {new Date(message.timestamp?.toDate()).toLocaleString(
+                    "en-US"
+                  )}
+                </span>
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
       <div className="chat__footer">
         <form>
