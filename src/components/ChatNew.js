@@ -8,7 +8,7 @@ import "firebase/compat/firestore";
 import { getRandomJokes } from "../api/getRandomJoke";
 import { useStateValue } from "../authentication/StateProvider";
 import sendIcon from "../image/send4.png";
-import geenTick from "../image/greentick.png";
+import greenTick from "../image/greentick.png";
 
 function ChatNew() {
   const [input, setInput] = useState("");
@@ -16,7 +16,8 @@ function ChatNew() {
   const [roomName, setRoomName] = useState("");
   const [messages, setMessages] = useState([]);
   const [joke, setJoke] = useState("");
-  const [{ user }, dispatch] = useStateValue();
+  const [{ user }] = useStateValue();
+  console.log("FIRST", joke);
 
   useEffect(() => {
     if (roomId) {
@@ -35,8 +36,18 @@ function ChatNew() {
     }
   }, [roomId]);
 
-  const randomJoke = async () => {
+  useEffect(() => {
     let chuckNorris = "Chuck Norris";
+    if (joke) {
+      db.collection("rooms").doc(roomId).collection("messages").add({
+        message: joke,
+        name: chuckNorris,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      });
+    }
+  }, [joke]);
+
+  const randomJoke = async () => {
     const data = getRandomJokes();
     data
       .then((res) => {
@@ -45,11 +56,6 @@ function ChatNew() {
       .then((response) => {
         setJoke(response.data.value);
       });
-    await db.collection("rooms").doc(roomId).collection("messages").add({
-      message: joke,
-      name: chuckNorris,
-      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-    });
   };
 
   const sendMessage = async (e) => {
@@ -67,7 +73,7 @@ function ChatNew() {
     <div className="chat">
       <div className="chat__header">
         <Avatar />
-        <img className="greenTick" src={geenTick} alt="" />
+        <img className="greenTick" src={greenTick} alt="" />
         <div className="chat__headerInfo">
           <h3>{roomName}</h3>
         </div>
