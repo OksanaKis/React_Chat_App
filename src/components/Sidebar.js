@@ -25,9 +25,13 @@ function Sidebar() {
     };
   }, []);
 
-  const filteredChatNames = rooms.filter((chatName) => {
-    return chatName.data.name.toLowerCase().includes(value.toLowerCase());
-  });
+  const filteredChatNames = rooms
+    .filter((chatName) => {
+      return chatName.data.name.toLowerCase().includes(value.toLowerCase());
+    })
+    .sort((a, b) => {
+      return b.data.lastActive - a.data.lastActive;
+    });
 
   return (
     <div className="sidebar">

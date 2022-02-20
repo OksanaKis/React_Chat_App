@@ -17,7 +17,7 @@ function ChatNew() {
   const [messages, setMessages] = useState([]);
   const [joke, setJoke] = useState("");
   const [{ user }] = useStateValue();
-  console.log("FIRST", joke);
+  let active = new Date().getTime();
 
   useEffect(() => {
     if (roomId) {
@@ -26,6 +26,9 @@ function ChatNew() {
         .onSnapshot((snapshot) => {
           setRoomName(snapshot.data().name);
         });
+      db.collection("rooms").doc(roomId).update({
+        lastActive: active,
+      });
       db.collection("rooms")
         .doc(roomId)
         .collection("messages")
@@ -81,9 +84,8 @@ function ChatNew() {
       <div className="chat__body">
         <div className="chat__bodyMessage">
           {messages.map((message, index) => (
-            <div className="chat__bodyMessage">
+            <div className="chat__bodyMessage" key={index}>
               <p
-                key={index}
                 className={`chat__message ${
                   message.name == user.displayName && "chat__receiver"
                 }`}

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./SidebarChat.css";
 import db from "../authentication/firebase";
-import geenTick from "../image/greentick.png";
+import greenTick from "../image/greentick.png";
 
 function SidebarChat({ id, name }) {
   const [messages, setMessages] = useState("");
@@ -24,7 +24,7 @@ function SidebarChat({ id, name }) {
     <Link to={`/rooms/${id}`} key={id}>
       <div className="sidebarChat">
         <Avatar />
-        <img className="greenTick" src={geenTick} alt="" />
+        <img className="greenTick" src={greenTick} alt="" />
         <div className="sidebarChat__info">
           <h2 className="sidebarChat__names">{name}</h2>
           <p>{messages[0]?.message.slice(0, 25) + "..."}</p>
