@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import "./Chat.css";
 import { Avatar } from "@material-ui/core";
@@ -18,6 +18,7 @@ function ChatNew() {
   const [joke, setJoke] = useState("");
   const [{ user }] = useStateValue();
   let active = new Date().getTime();
+  const messagesEndRef = useRef(null);
 
   useEffect(() => {
     if (roomId) {
@@ -49,6 +50,10 @@ function ChatNew() {
       });
     }
   }, [joke]);
+
+  useEffect(() => {
+    messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
   const randomJoke = async () => {
     const data = getRandomJokes();
@@ -99,6 +104,7 @@ function ChatNew() {
               </p>
             </div>
           ))}
+          <div ref={messagesEndRef} />
         </div>
       </div>
       <div className="chat__footer">
