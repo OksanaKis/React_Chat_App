@@ -27,9 +27,6 @@ function ChatNew() {
         .onSnapshot((snapshot) => {
           setRoomName(snapshot.data().name);
         });
-      db.collection("rooms").doc(roomId).update({
-        lastActive: active,
-      });
       db.collection("rooms")
         .doc(roomId)
         .collection("messages")
@@ -52,7 +49,7 @@ function ChatNew() {
   }, [joke]);
 
   useEffect(() => {
-    messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    messagesEndRef.current.scrollIntoView();
   }, [messages]);
 
   const randomJoke = async () => {
@@ -72,6 +69,9 @@ function ChatNew() {
       message: input,
       name: user.displayName,
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+    });
+    db.collection("rooms").doc(roomId).update({
+      lastActive: active,
     });
     setInput("");
     setTimeout(async () => await randomJoke(), 10000);
