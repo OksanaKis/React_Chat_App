@@ -6,10 +6,22 @@
 }
 
 .sidebar_header {
+  display: flex;
+  justify-content: space-between;
   background-color: #dadbd3;
   min-width: 10vw;
   padding-left: 24px;
   padding-top: 15px;
+}
+
+.logout {
+  margin-right: 35px;
+  background-color: #66cdaa;
+  color: #414a4c;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 6px 6px #989898, 12px 12px #6c6666;
 }
 
 .sidebar__search {

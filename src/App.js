@@ -4,6 +4,7 @@ import ChatNew from "./components/ChatNew";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./authentication/Login";
 import { useStateValue } from "../src/authentication/StateProvider";
+import { useEffect } from "react";
 
 function App() {
   const [{ user }, dispatch] = useStateValue();
