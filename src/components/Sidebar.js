@@ -12,6 +12,8 @@ function Sidebar() {
   const [{ user }, dispatch] = useStateValue();
   const [value, setValue] = useState("");
 
+  // console.log(rooms[0].data.lastActive)
+
   useEffect(() => {
     const unsubscribe = db.collection("rooms").onSnapshot((snapshot) => {
       setRooms(
@@ -38,7 +40,7 @@ function Sidebar() {
     <div className="sidebar">
       <div className="sidebar_header">
         <Avatar src={user?.photoURL}></Avatar>
-        <Logout/>
+        <Logout />
       </div>
       <div className="sidebar__search">
         <div className="sidebar__searchContainer">

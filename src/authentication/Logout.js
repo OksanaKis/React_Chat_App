@@ -19,7 +19,9 @@ function Logout() {
   };
 
   return (
-    <button className="logout" onClick={signOut}>Logout</button>
+    <button className="logout" onClick={signOut}>
+      Logout
+    </button>
   );
 }
 
