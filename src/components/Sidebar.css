@@ -5,6 +5,13 @@
   border-right: 3px solid lightgrey;
 }
 
+@media (min-width: 601px) and (max-width: 768px) {
+  .sidebar {
+    height: auto;
+    width: 35%;
+  }
+}
+
 .sidebar_header {
   display: flex;
   justify-content: space-between;
@@ -12,6 +19,13 @@
   min-width: 10vw;
   padding-left: 24px;
   padding-top: 15px;
+}
+
+@media (min-width: 601px) and (max-width: 768px) {
+  .sidebar_header {
+    height: auto;
+    padding: 10px;
+  }
 }
 
 .logout {
@@ -24,29 +38,68 @@
   box-shadow: 6px 6px #989898, 12px 12px #6c6666;
 }
 
+@media (min-width: 601px) and (max-width: 768px) {
+  .logout {
+    font-size: 15px;
+    height: auto;
+    box-shadow: none;
+    margin-right: 0;
+  }
+}
+
 .sidebar__search {
   display: flex;
   align-items: center;
   background-color: #dadbd3;
   height: 40px;
   padding: 15px;
-  border-bottom: 3px solid lightgrey;
+}
+
+@media (min-width: 601px) and (max-width: 768px) {
+  .sidebar__search {
+    height: 5%;
+    padding: 5px;
+  }
 }
 
 .sidebar__searchContainer {
   background-color: white;
   display: flex;
   align-items: center;
-  width: 100%;
   height: 40px;
   border-radius: 20px;
 }
+
+@media (min-width: 601px) and (max-width: 768px) {
+  .sidebar__searchContainer {
+    height: auto;
+  }
+}
+
 
 .sidebar__searchContainer > input {
   color: gray;
   border: none;
   padding: 0;
   margin-left: 10px;
+}
+
+@media (min-width: 601px) and (max-width: 768px) {
+  .sidebar__searchContainer > input{
+    font-size: 14px;
+    padding: 2px;
+    margin-left: 10px;
+    border-radius: 15px;
+    height: 30px;
+    width: 85%;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 768px) {
+  .sidebar__searchContainer > input::placeholder{
+    height: auto;
+    font-size: 12px;
+  }
 }
 
 .sidebar_chats {
@@ -60,6 +113,20 @@
   margin: 30px;
 }
 
+@media (min-width: 601px) and (max-width: 768px) {
+  .sidebar_chats > h2 {
+    margin: 10px;
+    font-size: 25px;
+  }
+}
+
+
 .search {
   margin-left: 15px;
+}
+
+@media (min-width: 601px) and (max-width: 768px) {
+  .search {
+    margin-left: 7px;
+  }
 }
