@@ -12,8 +12,6 @@ function Sidebar() {
   const [{ user }, dispatch] = useStateValue();
   const [value, setValue] = useState("");
 
-  // console.log(rooms[0].data.lastActive)
-
   useEffect(() => {
     const unsubscribe = db.collection("rooms").onSnapshot((snapshot) => {
       setRooms(
@@ -47,7 +45,7 @@ function Sidebar() {
           <img className="search" src={search} alt="" />
           <input
             type="text"
-            placeholder="Search or start new chat"
+            placeholder="Search a chat"
             onChange={(event) => setValue(event.target.value)}
           />
         </div>
