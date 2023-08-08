@@ -1,5 +1,7 @@
 {
   "projects": {
-    "default": "chat-app-7c113"
-  }
+    "default": "real-chat-9d376",
+    "staging": "real-chat-9d376"
+  },
+  "targets": {}
 }

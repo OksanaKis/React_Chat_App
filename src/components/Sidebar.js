@@ -5,6 +5,7 @@ import "./Sidebar.css";
 import SidebarChat from "./SidebarChat";
 import { useStateValue } from "../authentication/StateProvider";
 import search from "../image/search.png";
+import Logout from "../authentication/Logout";
 
 function Sidebar() {
   const [rooms, setRooms] = useState([]);
@@ -37,13 +38,14 @@ function Sidebar() {
     <div className="sidebar">
       <div className="sidebar_header">
         <Avatar src={user?.photoURL}></Avatar>
+        <Logout />
       </div>
       <div className="sidebar__search">
         <div className="sidebar__searchContainer">
           <img className="search" src={search} alt="" />
           <input
             type="text"
-            placeholder="Search or start new chat"
+            placeholder="Search a chat"
             onChange={(event) => setValue(event.target.value)}
           />
         </div>

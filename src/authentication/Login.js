@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import "../App.css";
 import "../authentication/Login.css";
 import chatImage from "../image/chat.png";
 import { auth, provider } from "./firebase";
-import { actionTypes } from "./reducer";
+import reducer, { actionTypes } from "./reducer";
 import { useStateValue } from "./StateProvider";
 
 function Login() {
